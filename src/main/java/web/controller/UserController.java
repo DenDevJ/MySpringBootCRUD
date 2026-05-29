@@ -30,7 +30,7 @@ public class UserController {
     public String addUser(@RequestParam("name") String name,
                           @RequestParam("email") String email,
                           @RequestParam("age") int age) {
-        userService.save(new User(name, email, age));
+        userService.save(name, email, age);
         return "redirect:/users";
     }
     @GetMapping("/editUser")
@@ -47,9 +47,7 @@ public class UserController {
                            @RequestParam("name") String name,
                            @RequestParam("email") String email,
                            @RequestParam("age") int age) {
-        User user = new User(name, email, age);
-        user.setId(id);
-        userService.update(user);
+        userService.update(id, name, email, age);
         return "redirect:/users";
     }
     @PostMapping("/deleteUser")

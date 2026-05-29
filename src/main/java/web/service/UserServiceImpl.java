@@ -14,13 +14,20 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     @Transactional
-    public void save(User user) {
+    public void save(String name, String email, int age) {
+        User user = new User(name, email, age);
         userDao.save(user);
     }
     @Override
     @Transactional
-    public void update(User user) {
-        userDao.update(user);
+    public void update(Long id, String name, String email, int age) {
+        User user = userDao.findById(id);
+        if (user != null) {
+            user.setName(name);
+            user.setEmail(email);
+            user.setAge(age);
+            userDao.update(user);
+        }
     }
     @Override
     @Transactional
